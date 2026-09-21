@@ -1,5 +1,6 @@
-import 'package:chaturvyuha_foundation/Screens/Dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'UserInterface/Dashboard/dashboard_screen.dart';
 
 void main() {
   runApp(const MyApp());

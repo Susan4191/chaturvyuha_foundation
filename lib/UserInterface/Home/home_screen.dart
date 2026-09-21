@@ -158,7 +158,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           const SizedBox(height: 48),
 
-                          // Add more widgets here.
+                          // About/mission highlights
+                          _buildMissionHighlights(isDesktop),
+
+                          const SizedBox(height: 64),
                         ],
                       ),
                     ),
@@ -172,6 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  //introductions
   Widget _buildIntroduction(bool isDesktop) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -240,6 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  //image
   Widget _buildImage() {
     return Container(
       width: double.infinity,
@@ -255,6 +260,95 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.circular(16),
           child: Image.asset(_logoPath, fit: BoxFit.contain),
         ),
+      ),
+    );
+  }
+
+  // Mission Highlights
+  Widget _buildMissionHighlights(bool isDesktop) {
+    final highlights = [
+      (
+        icon: Icons.auto_awesome_outlined,
+        title: 'Spiritual Activities',
+        description:
+            'Organize spiritual gatherings and programs that encourage reflection and meaningful connection.',
+      ),
+      (
+        icon: Icons.account_balance_outlined,
+        title: 'Culture & Heritage',
+        description:
+            'Build awareness of the importance of protecting our culture, traditions and indigenous values.',
+      ),
+      (
+        icon: Icons.self_improvement,
+        title: 'Yoga & Meditation',
+        description:
+            'Promote Vedic yoga and meditation to support mental and physical wellbeing.',
+      ),
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('OUR PURPOSE', style: AppTextStyles.sectionLabel),
+        const SizedBox(height: 12),
+        Text(
+          'What we work towards',
+          style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
+        ),
+        const SizedBox(height: 32),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final double cardWidth = isDesktop
+                ? (constraints.maxWidth - 40) / 3
+                : constraints.maxWidth;
+
+            return Wrap(
+              spacing: 20,
+              runSpacing: 20,
+              children: highlights
+                  .map(
+                    (h) => SizedBox(
+                      width: cardWidth,
+                      child: _buildHighlightCard(
+                        h.icon,
+                        h.title,
+                        h.description,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildHighlightCard(IconData icon, String title, String description) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: AppColor.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColor.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFF0DC),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: AppColor.primary, size: 28),
+          ),
+          const SizedBox(height: 20),
+          Text(title, style: AppTextStyles.title),
+          const SizedBox(height: 12),
+          Text(description, style: AppTextStyles.bodySmall),
+        ],
       ),
     );
   }

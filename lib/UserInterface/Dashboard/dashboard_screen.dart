@@ -1,14 +1,14 @@
-import 'package:chaturvyuha_foundation/Screens/about_screen.dart';
-import 'package:chaturvyuha_foundation/Screens/contact_us_screen.dart';
-import 'package:chaturvyuha_foundation/Screens/dharma_sanskriti_screen.dart';
-import 'package:chaturvyuha_foundation/Screens/education_screen.dart';
-import 'package:chaturvyuha_foundation/Screens/gallery_screen.dart';
-import 'package:chaturvyuha_foundation/Screens/Home/home_screen.dart';
-import 'package:chaturvyuha_foundation/Screens/yoga_meditation_screen.dart';
 import 'package:chaturvyuha_foundation/utils/app_colors.dart';
 import 'package:chaturvyuha_foundation/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import '../Home/home_screen.dart';
+import '../about_screen.dart';
 import '../become_member_scree.dart';
+import '../contact_us_screen.dart';
+import '../dharma_sanskriti_screen.dart';
+import '../education_screen.dart';
+import '../gallery_screen.dart';
+import '../yoga_meditation_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
