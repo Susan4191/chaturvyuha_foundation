@@ -1,5 +1,6 @@
 import 'package:chaturvyuha_foundation/utils/app_colors.dart';
 import 'package:chaturvyuha_foundation/utils/app_text_styles.dart';
+import 'package:chaturvyuha_foundation/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import '../Home/home_screen.dart';
 import '../about_screen.dart';
@@ -20,16 +21,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
 
-  final List<String> _navigation = [
-    "Home",
-    "About",
-    "Dharma & Sanskriti",
-    "Yoga & Meditation",
-    "Education",
-    "Gallery",
-    "Contact Us",
-    "Become a Member",
-  ];
+  final List<String> _navigation = AppConstants.navigationItems;
   final List<Widget> _pages = [
     const HomeScreen(),
     const AboutScreen(),

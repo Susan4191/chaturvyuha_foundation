@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:chaturvyuha_foundation/utils/app_colors.dart';
+import 'package:chaturvyuha_foundation/utils/app_constants.dart';
 
 import '../../utils/app_text_styles.dart';
 import '../../widgets/highlight_card.dart';
@@ -186,44 +187,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           const SizedBox(height: 64),
 
-                          // ==========================================
-                          // UPCOMING EVENTS SECTION
-                          // ==========================================
+                          // UPCOMING EVENTS SECTIO
                           _buildUpcomingEvents(isDesktop),
 
                           const SizedBox(height: 64),
-
-                          // ==========================================
-                          // LATEST ARTICLES & NEWS SECTION
-                          // ==========================================
+                          // LATEST ARTICLES & NEWS SECTIO
                           _buildLatestArticles(isDesktop),
 
                           const SizedBox(height: 64),
-
-                          // ==========================================
-                          // PHOTO & VIDEO HIGHLIGHTS SECTION
-                          // ==========================================
+                          // PHOTO & VIDEO HIGHLIGHTS SECTIO
                           _buildPhotoVideoHighlights(isDesktop),
 
                           const SizedBox(height: 64),
 
-                          // ==========================================
                           // ANNOUNCEMENTS SECTION
-                          // ==========================================
                           _buildAnnouncements(isDesktop),
 
                           const SizedBox(height: 64),
-
-                          // ==========================================
-                          // CONTACT & SOCIAL LINKS SECTION
-                          // ==========================================
+                          // CONTACT & SOCIAL LINKS SECTIO
                           _buildContactAndSocialLinks(isDesktop),
 
                           const SizedBox(height: 64),
 
-                          // ==========================================
                           // FOOTER SECTION
-                          // ==========================================
                           _buildFooter(isDesktop),
 
                           const SizedBox(height: 32),
@@ -534,9 +520,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ==========================================
-  // 1. UPCOMING EVENTS WIDGET
-  // ==========================================
+  // UPCOMING EVENTS WIDGET
   Widget _buildUpcomingEvents(bool isDesktop) {
     final events = [
       (
@@ -597,7 +581,7 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration(
         color: AppColor.surface,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColor.primary.withOpacity(0.3)),
+        border: Border.all(color: AppColor.primary.withAlpha(30)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -641,9 +625,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ==========================================
-  // 2. LATEST ARTICLES & NEWS WIDGET
-  // ==========================================
+  //LATEST ARTICLES & NEWS WIDGET
   Widget _buildLatestArticles(bool isDesktop) {
     final articles = [
       (
@@ -738,9 +720,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ==========================================
-  // 3. PHOTO & VIDEO HIGHLIGHTS WIDGET
-  // ==========================================
+  //PHOTO & VIDEO HIGHLIGHTS WIDGET
   Widget _buildPhotoVideoHighlights(bool isDesktop) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -808,9 +788,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ==========================================
-  // 4. ANNOUNCEMENTS WIDGET
-  // ==========================================
+  // ANNOUNCEMENTS WIDGET
   Widget _buildAnnouncements(bool isDesktop) {
     return Container(
       width: double.infinity,
@@ -854,9 +832,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ==========================================
-  // 5. CONTACT & SOCIAL LINKS WIDGET
-  // ==========================================
+  // CONTACT & SOCIAL LINKS WIDGET
   Widget _buildContactAndSocialLinks(bool isDesktop) {
     final socials = [
       (icon: Icons.facebook, label: 'Facebook'),
@@ -940,17 +916,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ==========================================
-  // 6. FOOTER WIDGET WITH POLICIES & INFO
-  // ==========================================
+  // FOOTER WIDGET WITH POLICIES & INFO
   Widget _buildFooter(bool isDesktop) {
-    final importantLinks = [
-      'About Us',
-      'Spiritual Activities',
-      'Vedic Education',
-      'Gallery',
-      'Become a Member',
-    ];
+    final importantLinks = AppConstants.navigationItems;
     final policies = ['Privacy Policy', 'Terms of Service', 'Cookie Policy'];
 
     return Container(
@@ -994,14 +962,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: AppTextStyles.sectionLabel,
                       ),
                       const SizedBox(height: 12),
-                      ...importantLinks.map(
-                        (l) => InkWell(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text(l, style: AppTextStyles.bodySmall),
-                          ),
-                        ),
+                      Wrap(
+                        direction: Axis.vertical,
+                        spacing: 8,
+                        children: importantLinks
+                            .map(
+                              (l) => InkWell(
+                                onTap: () {},
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 2,
+                                  ),
+                                  child: Text(
+                                    l,
+                                    style: AppTextStyles.bodySmall,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ),
                     ],
                   ),
@@ -1012,14 +991,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       const Text('LEGAL', style: AppTextStyles.sectionLabel),
                       const SizedBox(height: 12),
-                      ...policies.map(
-                        (p) => InkWell(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text(p, style: AppTextStyles.bodySmall),
-                          ),
-                        ),
+                      Wrap(
+                        direction: Axis.vertical,
+                        spacing: 8,
+                        children: policies
+                            .map(
+                              (p) => InkWell(
+                                onTap: () {},
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 2,
+                                  ),
+                                  child: Text(
+                                    p,
+                                    style: AppTextStyles.bodySmall,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
                       ),
                     ],
                   ),
@@ -1041,15 +1031,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 32),
                 const Text('QUICK LINKS', style: AppTextStyles.sectionLabel),
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
                 Wrap(
                   spacing: 16,
+                  runSpacing: 12,
                   children: importantLinks
                       .map(
                         (l) => InkWell(
                           onTap: () {},
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                              vertical: 4,
+                            ),
                             child: Text(l, style: AppTextStyles.bodySmall),
                           ),
                         ),
@@ -1058,15 +1052,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 32),
                 const Text('LEGAL', style: AppTextStyles.sectionLabel),
-                const SizedBox(height: 8),
+                const SizedBox(height: 12),
                 Wrap(
                   spacing: 16,
+                  runSpacing: 12,
                   children: policies
                       .map(
                         (p) => InkWell(
                           onTap: () {},
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                              vertical: 4,
+                            ),
                             child: Text(p, style: AppTextStyles.bodySmall),
                           ),
                         ),
