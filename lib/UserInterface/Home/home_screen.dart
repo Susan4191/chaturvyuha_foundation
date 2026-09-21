@@ -175,6 +175,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           _buildMissionHighlights(isDesktop),
 
                           const SizedBox(height: 64),
+
+                          // Yoga & Meditation highlights
+                          _buildYogaMeditationHighlights(isDesktop),
+
+                          const SizedBox(height: 64),
                         ],
                       ),
                     ),
@@ -188,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  //introductions
+  //Introductions
   Widget _buildIntroduction(bool isDesktop) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,6 +292,81 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 12),
         Text(
           'What we work towards',
+          style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
+        ),
+        const SizedBox(height: 32),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            if (isDesktop) {
+              return IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (int i = 0; i < highlights.length; i++) ...[
+                      Expanded(
+                        child: HighlightCard(
+                          icon: highlights[i].icon,
+                          title: highlights[i].title,
+                          description: highlights[i].description,
+                        ),
+                      ),
+                      if (i < highlights.length - 1) const SizedBox(width: 20),
+                    ],
+                  ],
+                ),
+              );
+            }
+
+            return Column(
+              children: highlights
+                  .map(
+                    (h) => Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: HighlightCard(
+                        icon: h.icon,
+                        title: h.title,
+                        description: h.description,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  // Yoga & Meditation Highlights
+  Widget _buildYogaMeditationHighlights(bool isDesktop) {
+    final highlights = [
+      (
+        icon: Icons.spa_outlined,
+        title: 'Holistic Health',
+        description:
+            'Focus on the unity of mind, body, and spirit through traditional Vedic practices.',
+      ),
+      (
+        icon: Icons.psychology_outlined,
+        title: 'Mindfulness',
+        description:
+            'Techniques to improve concentration, reduce stress, and achieve mental clarity.',
+      ),
+      (
+        icon: Icons.air_outlined,
+        title: 'Breath & Energy',
+        description:
+            'Learn Pranayama to balance your vital energy and enhance overall vitality.',
+      ),
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('YOGA & MEDITATION', style: AppTextStyles.sectionLabel),
+        const SizedBox(height: 12),
+        Text(
+          'Experience Inner Peace',
           style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
         ),
         const SizedBox(height: 32),
