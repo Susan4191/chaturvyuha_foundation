@@ -3,8 +3,8 @@ import 'package:chaturvyuha_foundation/utils/app_colors.dart';
 import 'package:chaturvyuha_foundation/utils/app_constants.dart';
 
 import '../../utils/app_text_styles.dart';
-import '../../widgets/highlight_card.dart';
-import '../../widgets/image_text_card.dart';
+import '../../Widgats/highlight_card.dart';
+import '../../Widgats/image_text_card.dart';
 
 class HomeScreen extends StatefulWidget {
   final ValueChanged<int>? onTabSelected;
