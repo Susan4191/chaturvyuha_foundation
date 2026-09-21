@@ -180,6 +180,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           _buildYogaMeditationHighlights(isDesktop),
 
                           const SizedBox(height: 64),
+
+                          // Vedic Education highlights
+                          _buildVedicEducationHighlights(isDesktop),
+
+                          const SizedBox(height: 64),
                         ],
                       ),
                     ),
@@ -367,6 +372,81 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 12),
         Text(
           'Experience Inner Peace',
+          style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
+        ),
+        const SizedBox(height: 32),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            if (isDesktop) {
+              return IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (int i = 0; i < highlights.length; i++) ...[
+                      Expanded(
+                        child: HighlightCard(
+                          icon: highlights[i].icon,
+                          title: highlights[i].title,
+                          description: highlights[i].description,
+                        ),
+                      ),
+                      if (i < highlights.length - 1) const SizedBox(width: 20),
+                    ],
+                  ],
+                ),
+              );
+            }
+
+            return Column(
+              children: highlights
+                  .map(
+                    (h) => Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: HighlightCard(
+                        icon: h.icon,
+                        title: h.title,
+                        description: h.description,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  // Vedic Education Highlights
+  Widget _buildVedicEducationHighlights(bool isDesktop) {
+    final highlights = [
+      (
+        icon: Icons.menu_book_outlined,
+        title: 'Ancient Scriptures',
+        description:
+            'Deep dive into the Vedas, Upanishads, and traditional texts to understand timeless wisdom.',
+      ),
+      (
+        icon: Icons.school_outlined,
+        title: 'Gurukul System',
+        description:
+            'Learn about classic lineage-based learning models that nurture values and comprehensive growth.',
+      ),
+      (
+        icon: Icons.translate_outlined,
+        title: 'Sanskrit Learning',
+        description:
+            'Discover the structure, phonetics, and beauty of the language of Vedic literature.',
+      ),
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('VEDIC EDUCATION', style: AppTextStyles.sectionLabel),
+        const SizedBox(height: 12),
+        Text(
+          'Empower through Knowledge',
           style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
         ),
         const SizedBox(height: 32),
