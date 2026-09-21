@@ -3,7 +3,7 @@ import 'package:chaturvyuha_foundation/utils/app_colors.dart';
 
 import '../../utils/app_text_styles.dart';
 import '../../widgets/highlight_card.dart';
-import '../../widgets/image_card.dart';
+import '../../widgets/image_text_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const SizedBox(width: 40),
                                 Expanded(
                                   flex: 5,
-                                  child: ImageCard(
+                                  child: ImageTextCard(
                                     imagePath: _logoPath,
                                     text:
                                         'Rooted in Tradition, Guided by Wisdom.',
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 _buildIntroduction(isDesktop),
                                 const SizedBox(height: 32),
-                                ImageCard(
+                                ImageTextCard(
                                   imagePath: _logoPath,
                                   text:
                                       'Rooted in Tradition, Guided by Wisdom.',

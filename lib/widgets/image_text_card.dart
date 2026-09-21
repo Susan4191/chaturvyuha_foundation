@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
 
-class ImageCard extends StatelessWidget {
+class ImageTextCard extends StatelessWidget {
   final String imagePath;
   final String? text;
 
-  const ImageCard({super.key, required this.imagePath, this.text});
+  const ImageTextCard({super.key, required this.imagePath, this.text});
 
   @override
   Widget build(BuildContext context) {
