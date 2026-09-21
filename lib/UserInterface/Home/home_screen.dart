@@ -324,17 +324,31 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 32),
         LayoutBuilder(
           builder: (context, constraints) {
-            final double cardWidth = isDesktop
-                ? (constraints.maxWidth - 40) / 3
-                : constraints.maxWidth;
+            if (isDesktop) {
+              return IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (int i = 0; i < highlights.length; i++) ...[
+                      Expanded(
+                        child: _buildHighlightCard(
+                          highlights[i].icon,
+                          highlights[i].title,
+                          highlights[i].description,
+                        ),
+                      ),
+                      if (i < highlights.length - 1) const SizedBox(width: 20),
+                    ],
+                  ],
+                ),
+              );
+            }
 
-            return Wrap(
-              spacing: 20,
-              runSpacing: 20,
+            return Column(
               children: highlights
                   .map(
-                    (h) => SizedBox(
-                      width: cardWidth,
+                    (h) => Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
                       child: _buildHighlightCard(
                         h.icon,
                         h.title,
