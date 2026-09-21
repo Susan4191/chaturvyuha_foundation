@@ -185,6 +185,48 @@ class _HomeScreenState extends State<HomeScreen> {
                           _buildVedicEducationHighlights(isDesktop),
 
                           const SizedBox(height: 64),
+
+                          // ==========================================
+                          // UPCOMING EVENTS SECTION
+                          // ==========================================
+                          _buildUpcomingEvents(isDesktop),
+
+                          const SizedBox(height: 64),
+
+                          // ==========================================
+                          // LATEST ARTICLES & NEWS SECTION
+                          // ==========================================
+                          _buildLatestArticles(isDesktop),
+
+                          const SizedBox(height: 64),
+
+                          // ==========================================
+                          // PHOTO & VIDEO HIGHLIGHTS SECTION
+                          // ==========================================
+                          _buildPhotoVideoHighlights(isDesktop),
+
+                          const SizedBox(height: 64),
+
+                          // ==========================================
+                          // ANNOUNCEMENTS SECTION
+                          // ==========================================
+                          _buildAnnouncements(isDesktop),
+
+                          const SizedBox(height: 64),
+
+                          // ==========================================
+                          // CONTACT & SOCIAL LINKS SECTION
+                          // ==========================================
+                          _buildContactAndSocialLinks(isDesktop),
+
+                          const SizedBox(height: 64),
+
+                          // ==========================================
+                          // FOOTER SECTION
+                          // ==========================================
+                          _buildFooter(isDesktop),
+
+                          const SizedBox(height: 32),
                         ],
                       ),
                     ),
@@ -489,6 +531,562 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ],
+    );
+  }
+
+  // ==========================================
+  // 1. UPCOMING EVENTS WIDGET
+  // ==========================================
+  Widget _buildUpcomingEvents(bool isDesktop) {
+    final events = [
+      (
+        title: 'Maha Shivaratri Satsang',
+        date: 'March 8, 2024',
+        time: '6:00 PM',
+        location: 'Main Community Hall',
+      ),
+      (
+        title: 'Vedic Yoga Retreat',
+        date: 'April 15, 2024',
+        time: '6:00 AM',
+        location: 'Wellness Center',
+      ),
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('UPCOMING EVENTS', style: AppTextStyles.sectionLabel),
+        const SizedBox(height: 12),
+        Text(
+          'Join our gatherings',
+          style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
+        ),
+        const SizedBox(height: 32),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            if (isDesktop) {
+              return Row(
+                children: [
+                  for (int i = 0; i < events.length; i++) ...[
+                    Expanded(child: _eventCard(events[i])),
+                    if (i < events.length - 1) const SizedBox(width: 20),
+                  ],
+                ],
+              );
+            }
+            return Column(
+              children: events
+                  .map(
+                    (e) => Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: _eventCard(e),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _eventCard(var event) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: AppColor.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColor.primary.withOpacity(0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.calendar_today_outlined,
+                size: 18,
+                color: AppColor.primary,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                event.date,
+                style: AppTextStyles.bodySmall.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Spacer(),
+              const Icon(Icons.access_time, size: 18, color: AppColor.grey),
+              const SizedBox(width: 4),
+              Text(event.time, style: AppTextStyles.bodySmall),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(event.title, style: AppTextStyles.title),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              const Icon(
+                Icons.location_on_outlined,
+                size: 18,
+                color: AppColor.grey,
+              ),
+              const SizedBox(width: 4),
+              Text(event.location, style: AppTextStyles.bodySmall),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ==========================================
+  // 2. LATEST ARTICLES & NEWS WIDGET
+  // ==========================================
+  Widget _buildLatestArticles(bool isDesktop) {
+    final articles = [
+      (
+        title: 'The Relevance of Vedas in Modern Life',
+        category: 'Wisdom',
+        excerpt:
+            'Discover how ancient Vedic principles can help solve modern day lifestyle challenges...',
+      ),
+      (
+        title: 'Pranayama: Science of Breath Control',
+        category: 'Wellness',
+        excerpt:
+            'Understanding the mechanics behind traditional pranayama practices and physical health...',
+      ),
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('LATEST ARTICLES', style: AppTextStyles.sectionLabel),
+        const SizedBox(height: 12),
+        Text(
+          'Insights and Stories',
+          style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
+        ),
+        const SizedBox(height: 32),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            if (isDesktop) {
+              return Row(
+                children: [
+                  for (int i = 0; i < articles.length; i++) ...[
+                    Expanded(child: _articleCard(articles[i])),
+                    if (i < articles.length - 1) const SizedBox(width: 20),
+                  ],
+                ],
+              );
+            }
+            return Column(
+              children: articles
+                  .map(
+                    (a) => Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: _articleCard(a),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _articleCard(var article) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: AppColor.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColor.primary.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFF0DC),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              article.category.toUpperCase(),
+              style: AppTextStyles.bulletLabel.copyWith(fontSize: 10),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(article.title, style: AppTextStyles.title),
+          const SizedBox(height: 12),
+          Text(article.excerpt, style: AppTextStyles.bodySmall),
+          const SizedBox(height: 16),
+          TextButton(
+            onPressed: () {},
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+              minimumSize: Size.zero,
+            ),
+            child: const Text('Read More →', style: AppTextStyles.link),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ==========================================
+  // 3. PHOTO & VIDEO HIGHLIGHTS WIDGET
+  // ==========================================
+  Widget _buildPhotoVideoHighlights(bool isDesktop) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('MEDIA HIGHLIGHTS', style: AppTextStyles.sectionLabel),
+        const SizedBox(height: 12),
+        Text(
+          'Moments captured',
+          style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
+        ),
+        const SizedBox(height: 32),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final double gridWidth = isDesktop
+                ? (constraints.maxWidth - 40) / 3
+                : constraints.maxWidth;
+            final placeholders = [
+              (
+                title: 'Cultural Festival 2023',
+                icon: Icons.photo_library_outlined,
+              ),
+              (
+                title: 'International Yoga Day',
+                icon: Icons.video_library_outlined,
+              ),
+              (
+                title: 'Gurukul Graduation Day',
+                icon: Icons.photo_library_outlined,
+              ),
+            ];
+
+            return Wrap(
+              spacing: 20,
+              runSpacing: 20,
+              children: placeholders.map((p) {
+                return Container(
+                  width: gridWidth,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: AppColor.surface,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: AppColor.primary.withOpacity(0.2),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(p.icon, size: 40, color: AppColor.primary),
+                      const SizedBox(height: 16),
+                      Text(
+                        p.title,
+                        style: AppTextStyles.bodySmall.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  // ==========================================
+  // 4. ANNOUNCEMENTS WIDGET
+  // ==========================================
+  Widget _buildAnnouncements(bool isDesktop) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(28),
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFF0DC),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColor.primary.withOpacity(0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.campaign_outlined,
+                color: AppColor.primary,
+                size: 28,
+              ),
+              const SizedBox(width: 12),
+              Text(
+                'ANNOUNCEMENTS',
+                style: AppTextStyles.sectionLabel.copyWith(
+                  color: AppColor.primary,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Admissions Open for Sanskrit Batch 2024!',
+            style: AppTextStyles.title.copyWith(fontSize: 20),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Enroll today to learn foundational phonetics, grammar, and pronunciation rules from expert faculty.',
+            style: AppTextStyles.body,
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ==========================================
+  // 5. CONTACT & SOCIAL LINKS WIDGET
+  // ==========================================
+  Widget _buildContactAndSocialLinks(bool isDesktop) {
+    final socials = [
+      (icon: Icons.facebook, label: 'Facebook'),
+      (icon: Icons.camera_alt_outlined, label: 'Instagram'),
+      (icon: Icons.smart_display_outlined, label: 'YouTube'),
+    ];
+
+    final contactInfo = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('CONTACT US', style: AppTextStyles.sectionLabel),
+        const SizedBox(height: 12),
+        Text(
+          'Get in Touch',
+          style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
+        ),
+        const SizedBox(height: 20),
+        Row(
+          children: [
+            const Icon(Icons.email_outlined, color: AppColor.primary),
+            const SizedBox(width: 12),
+            Text('info@chaturvyuha.org', style: AppTextStyles.body),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            const Icon(Icons.phone_outlined, color: AppColor.primary),
+            const SizedBox(width: 12),
+            Text('+1 (555) 019-2834', style: AppTextStyles.body),
+          ],
+        ),
+      ],
+    );
+
+    final socialWidget = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('FOLLOW OUR JOURNEY', style: AppTextStyles.sectionLabel),
+        const SizedBox(height: 12),
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          children: socials.map((s) {
+            return ElevatedButton.icon(
+              onPressed: () {},
+              icon: Icon(s.icon, size: 20),
+              label: Text(s.label),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColor.surface,
+                foregroundColor: AppColor.primary,
+                elevation: 0,
+                side: BorderSide(color: AppColor.primary.withOpacity(0.3)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+
+    if (isDesktop) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(child: contactInfo),
+          const SizedBox(width: 40),
+          Expanded(child: socialWidget),
+        ],
+      );
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [contactInfo, const SizedBox(height: 40), socialWidget],
+    );
+  }
+
+  // ==========================================
+  // 6. FOOTER WIDGET WITH POLICIES & INFO
+  // ==========================================
+  Widget _buildFooter(bool isDesktop) {
+    final importantLinks = [
+      'About Us',
+      'Spiritual Activities',
+      'Vedic Education',
+      'Gallery',
+      'Become a Member',
+    ];
+    final policies = ['Privacy Policy', 'Terms of Service', 'Cookie Policy'];
+
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 40),
+      decoration: const BoxDecoration(
+        border: Border(top: BorderSide(color: AppColor.primary, width: 0.5)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (isDesktop)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Chaturvyuha Foundation',
+                        style: AppTextStyles.title.copyWith(
+                          color: AppColor.primary,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Preserving ancient Vedic knowledge and cultural heritage for a harmonious and balanced society.',
+                        style: AppTextStyles.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 40),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'QUICK LINKS',
+                        style: AppTextStyles.sectionLabel,
+                      ),
+                      const SizedBox(height: 12),
+                      ...importantLinks.map(
+                        (l) => InkWell(
+                          onTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(l, style: AppTextStyles.bodySmall),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('LEGAL', style: AppTextStyles.sectionLabel),
+                      const SizedBox(height: 12),
+                      ...policies.map(
+                        (p) => InkWell(
+                          onTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(p, style: AppTextStyles.bodySmall),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          else
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Chaturvyuha Foundation',
+                  style: AppTextStyles.title.copyWith(color: AppColor.primary),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Preserving ancient Vedic knowledge and cultural heritage for a harmonious and balanced society.',
+                  style: AppTextStyles.bodySmall,
+                ),
+                const SizedBox(height: 32),
+                const Text('QUICK LINKS', style: AppTextStyles.sectionLabel),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 16,
+                  children: importantLinks
+                      .map(
+                        (l) => InkWell(
+                          onTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(l, style: AppTextStyles.bodySmall),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+                const SizedBox(height: 32),
+                const Text('LEGAL', style: AppTextStyles.sectionLabel),
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 16,
+                  children: policies
+                      .map(
+                        (p) => InkWell(
+                          onTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(p, style: AppTextStyles.bodySmall),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
+            ),
+          const SizedBox(height: 40),
+          Center(
+            child: Text(
+              '© ${DateTime.now().year} Chaturvyuha Foundation. All Rights Reserved.',
+              style: AppTextStyles.bodySmall.copyWith(
+                fontSize: 12,
+                color: AppColor.grey,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
