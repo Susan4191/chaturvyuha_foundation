@@ -48,6 +48,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.backgroundColor,
+        scrolledUnderElevation: 0,
         centerTitle: false,
 
         toolbarHeight: 80,

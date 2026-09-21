@@ -252,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration(
         color: AppColor.surface,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColor.border),
+        border: Border.all(color: AppColor.primary),
       ),
       child: AspectRatio(
         aspectRatio: 1.2,
@@ -325,13 +325,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  //mission container card
   Widget _buildHighlightCard(IconData icon, String title, String description) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: AppColor.surface,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColor.border),
+        border: Border.all(color: AppColor.primary),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
