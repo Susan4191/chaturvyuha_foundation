@@ -2,14 +2,18 @@ import 'package:chaturvyuha_foundation/utils/app_colors.dart';
 import 'package:chaturvyuha_foundation/utils/app_text_styles.dart';
 import 'package:chaturvyuha_foundation/utils/app_constants.dart';
 import 'package:flutter/material.dart';
+
+// Import all functional screens
 import '../About/about_screen.dart';
-import '../Become a member/become_member_scree.dart';
+import '../BecomeMember/become_member_screen.dart';
 import '../ContactUs/contact_us_screen.dart';
 import '../Home/home_screen.dart';
 import '../dharma_sanskriti_screen/dharma_sanskriti_screen.dart';
-import '../Educatios/education_screen.dart';
-import '../Galery/gallery_screen.dart';
-import '../YogaAndMeditio/yoga_meditation_screen.dart';
+import '../Education/education_screen.dart';
+import '../Media/media_screen.dart';
+import '../YogaAndMeditation/yoga_meditation_screen.dart';
+import '../Events/events_screen.dart';
+import '../Knowledge/knowledge_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -20,34 +24,40 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
+  late List<Widget> _pages;
 
   final List<String> _navigation = AppConstants.navigationItems;
-  List<Widget> get _pages => [
-    HomeScreen(
-      onTabSelected: (index) => setState(() => _selectedIndex = index),
-    ),
 
-    const AboutScreen(),
-    const DharmaSanskritiScreen(),
-    const YogaMeditationScreen(),
-    const EducationScreen(),
-    const GalleryScreen(),
-    const ContactUsScreen(),
-    const BecomeMemberScree(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      HomeScreen(
+        onTabSelected: (index) => setState(() => _selectedIndex = index),
+      ),
+      const AboutScreen(),
+      const DharmaSanskritiScreen(),
+      const YogaMeditationScreen(),
+      const EducationScreen(),
+      const EventsScreen(),
+      const KnowledgeScreen(),
+      const MediaScreen(),
+      const ContactUsScreen(),
+      const BecomeMemberScreen(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
-    final bool isSmallScreen = MediaQuery.of(context).size.width < 1100;
+    // Breakpoint for smaller laptop/tablet screens
+    final bool isSmallScreen = MediaQuery.of(context).size.width < 1200;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.backgroundColor,
         scrolledUnderElevation: 0,
         centerTitle: false,
-
         toolbarHeight: 80,
-
         titleSpacing: isSmallScreen ? 15 : 50,
         title: ClipRRect(
           borderRadius: BorderRadius.circular(8),
@@ -58,15 +68,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 const Icon(Icons.error),
           ),
         ),
-
         actions: !isSmallScreen
             ? [
                 ...List.generate(
                   _navigation.length,
                   (index) => menuButton(index: index, text: _navigation[index]),
                 ),
-
-                // Right-side space
                 const SizedBox(width: 50),
               ]
             : [
@@ -83,7 +90,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ],
       ),
 
-      //sideNavigation
+      // Side Navigation Drawer for Mobile/Tablet
       endDrawer: isSmallScreen
           ? Drawer(
               child: ListView(
@@ -95,8 +102,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       children: [
                         Align(
                           alignment: Alignment.center,
-
-                          //sideTopImage
                           child: Image.asset("assets/chaturvedal-1.png"),
                         ),
                         Align(
@@ -109,8 +114,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ],
                     ),
                   ),
-
-                  //sideNavigation
                   ...List.generate(
                     _navigation.length,
                     ((index) => sideListTile(
@@ -123,14 +126,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             )
           : null,
-      body: _pages[_selectedIndex],
+      body: IndexedStack(index: _selectedIndex, children: _pages),
     );
   }
 
-  //NavigationMenu
+  // Header Navigation Menu Buttons
   TextButton menuButton({required int index, required String text}) {
     final bool isSelected = _selectedIndex == index;
-
     return TextButton(
       onPressed: () => setState(() => _selectedIndex = index),
       style: TextButton.styleFrom(
@@ -145,7 +147,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  //sideNavigationMenu
+  // Drawer Menu List Items
   ListTile sideListTile(
     BuildContext context, {
     required String text,
@@ -158,7 +160,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       iconColor: AppColor.grey,
       onTap: () {
         setState(() => _selectedIndex = index);
-        Navigator.pop(context); // Close the drawer.
+        Navigator.pop(context);
       },
     );
   }

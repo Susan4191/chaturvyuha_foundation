@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:chaturvyuha_foundation/utils/app_colors.dart';
-
-import '../../utils/app_text_styles.dart';
+import 'package:chaturvyuha_foundation/utils/app_text_styles.dart';
+import 'package:chaturvyuha_foundation/data/sample_data.dart';
+import 'package:chaturvyuha_foundation/models/team_member.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -21,26 +22,48 @@ class AboutScreen extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 1320),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: isDesktop ? 23 : 24,
+                      horizontal: isDesktop ? 48 : 24,
                       vertical: isDesktop ? 56 : 32,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // 1. Introduction section
                         _buildIntroduction(isDesktop),
-                        const SizedBox(height: 40),
-                        _buildMission(),
                         const SizedBox(height: 48),
-                        _buildSectionLabel('OUR PURPOSE'),
+
+                        // 2. Vision and Mission
+                        _buildVisionMission(isDesktop),
+                        const SizedBox(height: 48),
+
+                        // 3. Logo & Identity explanation
+                        _buildLogoExplanation(),
+                        const SizedBox(height: 48),
+
+                        // 4. History/Timeline
+                        _buildTimeline(isDesktop),
+                        const SizedBox(height: 48),
+
+                        // 5. Objectives
+                        _buildSectionLabel('OUR CORE OBJECTIVES'),
                         const SizedBox(height: 12),
                         Text(
                           'What we work towards',
-                          style: _headingStyle(isDesktop ? 36 : 28),
+                          style: AppTextStyles.heading2.copyWith(
+                            fontSize: isDesktop ? 36 : 28,
+                          ),
                         ),
                         const SizedBox(height: 24),
-                        _buildObjectives(),
+                        _buildObjectives(constraints.maxWidth),
+                        const SizedBox(height: 48),
+
+                        // 6. Leadership/Team
+                        _buildLeadershipTeam(isDesktop),
+                        const SizedBox(height: 48),
+
+                        // 7. Organization & Contact Info
+                        _buildOrgAndContact(isDesktop),
                         const SizedBox(height: 40),
-                        _buildClosingMessage(),
                       ],
                     ),
                   ),
@@ -57,25 +80,24 @@ class AboutScreen extends StatelessWidget {
     final introduction = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionLabel('ABOUT US'),
+        _buildSectionLabel('ABOUT CHATURVYUHA FOUNDATION'),
         const SizedBox(height: 18),
         Text(
           'Rooted in wisdom.\nUnited in purpose.',
-          style: _headingStyle(isDesktop ? 48 : 34),
+          style: AppTextStyles.heading.copyWith(
+            fontSize: isDesktop ? 48 : 34,
+            color: AppColor.heading,
+          ),
         ),
         const SizedBox(height: 24),
-        Text(
-          'Chaturvyuha Foundation is dedicated to preserving cultural '
-          'heritage, sharing Vedic knowledge and encouraging a '
-          'balanced, meaningful way of life.',
-          style: _bodyStyle(18),
+        const Text(
+          'Chaturvyuha Foundation is a non-profit spiritual and cultural organization dedicated to preserving ancient heritage, sharing Vedic wisdom, and encouraging a balanced, meaningful way of life.',
+          style: AppTextStyles.bodyLarge,
         ),
         const SizedBox(height: 16),
-        Text(
-          'Our purpose brings together spiritual activities, yoga, '
-          'meditation and education to promote wellbeing, harmony '
-          'and respect across communities.',
-          style: _bodyStyle(16),
+        const Text(
+          'Our multi-faceted purpose encompasses regular spiritual activities, classical yoga systems, structured meditation methodologies, and language instruction to promote wellbeing, planetary harmony, and respectful community integration.',
+          style: AppTextStyles.body,
         ),
       ],
     );
@@ -90,16 +112,14 @@ class AboutScreen extends StatelessWidget {
             'assets/chaturvedal-1.png',
             height: 160,
             fit: BoxFit.contain,
-            errorBuilder: (context, error, stackTrace) {
-              return Icon(
-                Icons.spa_outlined,
-                size: 100,
-                color: AppColor.primary,
-              );
-            },
+            errorBuilder: (context, error, stackTrace) => const Icon(
+              Icons.spa_outlined,
+              size: 100,
+              color: AppColor.primary,
+            ),
           ),
           const SizedBox(height: 24),
-          Text(
+          const Text(
             'Wisdom • Wellness • Community',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -123,200 +143,352 @@ class AboutScreen extends StatelessWidget {
         ],
       );
     }
+    return Column(children: [introduction, const SizedBox(height: 28), logo]);
+  }
 
+  Widget _buildVisionMission(bool isDesktop) {
+    final visionCard = Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(28),
+        decoration: BoxDecoration(
+          color: const Color(0xFFFFF0DC),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: AppColor.primary.withAlpha(50)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSectionLabel('OUR VISION'),
+            const SizedBox(height: 12),
+            Text('A Harmonious & Balanced Society', style: AppTextStyles.title),
+            const SizedBox(height: 12),
+            const Text(
+              'To cultivate an enlightened world community where timeless spiritual understanding acts as a guide for sustainable living, unity, and shared social welfare.',
+              style: AppTextStyles.bodySmall,
+            ),
+          ],
+        ),
+      ),
+    );
+
+    final missionCard = Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(28),
+        decoration: BoxDecoration(
+          color: const Color(0xFFFFF0DC),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: AppColor.primary.withAlpha(50)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSectionLabel('OUR MISSION'),
+            const SizedBox(height: 12),
+            Text(
+              'Preserving Traditions & Inspiring Mindful Living',
+              style: AppTextStyles.title,
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              'To make spiritual learning, authentic Vedic education, classical yoga, and traditional languages fully accessible to individuals across all classes, castes, and backgrounds.',
+              style: AppTextStyles.bodySmall,
+            ),
+          ],
+        ),
+      ),
+    );
+
+    if (isDesktop) {
+      return IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [visionCard, const SizedBox(width: 24), missionCard],
+        ),
+      );
+    }
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [introduction, const SizedBox(height: 28), logo],
+      children: [visionCard, const SizedBox(height: 20), missionCard],
     );
   }
 
-  Widget _buildMission() {
+  Widget _buildLogoExplanation() {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(28),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFF0DC),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColor.grey),
-      ),
+      decoration: _cardDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildSectionLabel('OUR MISSION'),
+          _buildSectionLabel('IDENTITY & LOGO MEANING'),
           const SizedBox(height: 14),
           Text(
-            'Preserving traditions. Inspiring mindful living.',
-            style: _headingStyle(28),
+            'Fictional Placeholder Interpretation',
+            style: AppTextStyles.title,
           ),
-          const SizedBox(height: 16),
-          Text(
-            'To preserve culture, traditions and indigenous values '
-            'while making spiritual learning, Vedic education, yoga '
-            'and meditation accessible to people of every caste, '
-            'class and community.',
-            style: _bodyStyle(16),
-          ),
+          const SizedBox(height: 12),
+          const Text(SampleData.logoExplanation, style: AppTextStyles.body),
         ],
       ),
     );
   }
 
-  Widget _buildObjectives() {
-    final objectives = [
-      (
-        icon: Icons.auto_awesome_outlined,
-        title: 'Spiritual Activities',
-        description:
-            'Organize spiritual gatherings, discourses and related '
-            'programs that encourage reflection and meaningful connection.',
-      ),
-      (
-        icon: Icons.account_balance_outlined,
-        title: 'Culture & Heritage',
-        description:
-            'Build awareness of the importance of protecting our '
-            'culture, traditions and indigenous values.',
-      ),
-      (
-        icon: Icons.self_improvement,
-        title: 'Yoga & Meditation',
-        description:
-            'Promote Vedic yoga and meditation to support mental '
-            'and physical wellbeing.',
-      ),
-      (
-        icon: Icons.menu_book_outlined,
-        title: 'Vedic Education',
-        description:
-            'Encourage Vedic learning for the welfare, harmony '
-            'and peace of society.',
-      ),
-      (
-        icon: Icons.favorite_outline,
-        title: 'Mindful Lifestyles',
-        description:
-            'Encourage healthier habits and thoughtful choices '
-            'that contribute to a caring and responsible society.',
-      ),
+  Widget _buildTimeline(bool isDesktop) {
+    final timelineEvents = [
+      {
+        "year": "2021",
+        "title": "Foundation Inception",
+        "desc":
+            "Started as a small scriptural reading circle focused on primary Vedic text analysis.",
+      },
+      {
+        "year": "2022",
+        "title": "Community Yoga Launch",
+        "desc":
+            "Opened virtual and localized introductory breathing training sessions for health relief.",
+      },
+      {
+        "year": "2023",
+        "title": "Establishment of Core Center",
+        "desc":
+            "Acquired physical infrastructure to support direct Sanskrit learning cohorts and seminars.",
+      },
     ];
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final columns = constraints.maxWidth >= 1000
-            ? 3
-            : constraints.maxWidth >= 620
-            ? 2
-            : 1;
-
-        const spacing = 20.0;
-        final cardWidth =
-            (constraints.maxWidth - spacing * (columns - 1)) / columns;
-
-        return Wrap(
-          spacing: spacing,
-          runSpacing: spacing,
-          children: objectives.map((objective) {
-            return SizedBox(
-              width: cardWidth,
-              child: _buildObjectiveCard(
-                icon: objective.icon,
-                title: objective.title,
-                description: objective.description,
-              ),
-            );
-          }).toList(),
-        );
-      },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionLabel('OUR JOURNEY TIMELINE'),
+        const SizedBox(height: 12),
+        Text(
+          'Milestones achieved',
+          style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
+        ),
+        const SizedBox(height: 24),
+        Column(
+          children: timelineEvents
+              .map(
+                (e) => Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColor.primary,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          e["year"]!,
+                          style: AppTextStyles.bodySmall.copyWith(
+                            color: AppColor.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              e["title"]!,
+                              style: AppTextStyles.title.copyWith(fontSize: 18),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(e["desc"]!, style: AppTextStyles.bodySmall),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+              .toList(),
+        ),
+      ],
     );
   }
 
-  Widget _buildObjectiveCard({
-    required IconData icon,
-    required String title,
-    required String description,
-  }) {
+  Widget _buildObjectives(double maxWidth) {
+    final objectives = [
+      {
+        "title": "Spiritual Activities",
+        "desc":
+            "Organize regular scriptural gatherings and collaborative prayer frameworks.",
+      },
+      {
+        "title": "Culture & Heritage",
+        "desc":
+            "Promote protection models for ancient traditions and indigenous societal values.",
+      },
+      {
+        "title": "Yoga & Meditation",
+        "desc":
+            "Teach classical systems to support daily mental clarity and physical balance.",
+      },
+      {
+        "title": "Vedic Education",
+        "desc":
+            "Foster comprehensive scripture academies for educational social research.",
+      },
+    ];
+
+    final columns = maxWidth >= 900 ? 2 : 1;
+    final cardWidth = (maxWidth - (columns - 1) * 20) / columns;
+
+    return Wrap(
+      spacing: 20,
+      runSpacing: 20,
+      children: objectives
+          .map(
+            (obj) => Container(
+              width: cardWidth,
+              padding: const EdgeInsets.all(24),
+              decoration: _cardDecoration(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.circle, size: 8, color: AppColor.primary),
+                  const SizedBox(height: 12),
+                  Text(obj["title"]!, style: AppTextStyles.title),
+                  const SizedBox(height: 8),
+                  Text(obj["desc"]!, style: AppTextStyles.bodySmall),
+                ],
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  Widget _buildLeadershipTeam(bool isDesktop) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionLabel('LEADERSHIP & MASTER TEACHERS'),
+        const SizedBox(height: 12),
+        Text(
+          'Guides along the path',
+          style: AppTextStyles.heading2.copyWith(fontSize: isDesktop ? 36 : 28),
+        ),
+        const SizedBox(height: 24),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            if (isDesktop) {
+              return IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: SampleData.teamMembers
+                      .map(
+                        (m) => Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: _buildTeamCard(m),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                ),
+              );
+            }
+            return Column(
+              children: SampleData.teamMembers
+                  .map(
+                    (m) => Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: _buildTeamCard(m),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTeamCard(TeamMember member) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: _cardDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFFF0DC),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Icon(icon, color: AppColor.primary, size: 28),
+          const CircleAvatar(
+            radius: 30,
+            backgroundColor: Color(0xFFFFF0DC),
+            child: Icon(Icons.person, color: AppColor.primary, size: 32),
           ),
-          const SizedBox(height: 20),
-          Text(title, style: _headingStyle(23)),
+          const SizedBox(height: 16),
+          Text(member.name, style: AppTextStyles.title.copyWith(fontSize: 18)),
+          Text(
+            member.role,
+            style: AppTextStyles.bulletLabel.copyWith(fontSize: 12),
+          ),
           const SizedBox(height: 12),
-          Text(description, style: _bodyStyle(15)),
+          Text(member.bio, style: AppTextStyles.bodySmall),
         ],
       ),
     );
   }
 
-  Widget _buildClosingMessage() {
+  Widget _buildOrgAndContact(bool isDesktop) {
+    final cardContent = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionLabel('OFFICIAL ORGANIZATION INFORMATION'),
+        const SizedBox(height: 16),
+        Text('Chaturvyuha Foundation (Demo Setup)', style: AppTextStyles.title),
+        const SizedBox(height: 12),
+        const Text(
+          '• Headquarters Placeholder Address: 108 Vedic Enclave, Cultural District',
+          style: AppTextStyles.bodySmall,
+        ),
+        const Text(
+          '• Primary Support Email: info@chaturvyuha.org',
+          style: AppTextStyles.bodySmall,
+        ),
+        const Text(
+          '• Registration Reference: CF-DEMO-2024-501C3',
+          style: AppTextStyles.bodySmall,
+        ),
+        const SizedBox(height: 16),
+        const Text(
+          '// TODO: Replace with official state validation parameters when final parameters are formalized.',
+          style: TextStyle(
+            color: Colors.orange,
+            fontSize: 13,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+      ],
+    );
+
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+      padding: const EdgeInsets.all(28),
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: AppColor.black, width: 2)),
+        color: AppColor.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColor.primary.withAlpha(40)),
       ),
-      child: Column(
-        children: [
-          Icon(Icons.diversity_3_outlined, color: AppColor.primary, size: 36),
-          const SizedBox(height: 16),
-          Text(
-            'A place for every community.',
-            textAlign: TextAlign.center,
-            style: _headingStyle(26),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'Our purpose embraces people of every caste, class '
-            'and community through shared learning and mutual respect.',
-            textAlign: TextAlign.center,
-            style: _bodyStyle(16),
-          ),
-        ],
-      ),
+      child: cardContent,
     );
   }
 
   Widget _buildSectionLabel(String text) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: AppColor.primary,
-        fontSize: 12,
-        fontWeight: FontWeight.w700,
-        letterSpacing: 2,
-        height: 1.5,
-      ),
-    );
-  }
-
-  TextStyle _headingStyle(double size) {
-    return AppTextStyles.heading.copyWith(
-      color: AppColor.black,
-      fontSize: size,
-      fontWeight: FontWeight.w700,
-      height: 1.2,
-    );
-  }
-
-  TextStyle _bodyStyle(double size) {
-    return TextStyle(color: AppColor.grey, fontSize: size, height: 1.7);
+    return Text(text, style: AppTextStyles.sectionLabel);
   }
 
   BoxDecoration _cardDecoration() {
     return BoxDecoration(
-      color: const Color(0xFFFFFCF7),
+      color: AppColor.surface,
       borderRadius: BorderRadius.circular(20),
-      border: Border.all(color: AppColor.grey),
+      border: Border.all(color: AppColor.primary.withAlpha(30)),
     );
   }
 }

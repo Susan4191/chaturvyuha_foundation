@@ -5,7 +5,9 @@ class AppConstants {
     "Dharma & Sanskriti",
     "Yoga & Meditation",
     "Education",
-    "Gallery",
+    "Events & Programs",
+    "Knowledge & Articles",
+    "Media",
     "Contact Us",
     "Become a Member",
   ];

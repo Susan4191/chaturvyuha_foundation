@@ -196,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           const SizedBox(height: 64),
 
-                          // UPCOMING EVENTS SECTIO
+                          // UPCOMING EVENTS
                           _buildUpcomingEvents(isDesktop),
 
                           const SizedBox(height: 64),
@@ -279,7 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // Membership button
         ElevatedButton(
           onPressed: () {
-            widget.onTabSelected?.call(7);
+            widget.onTabSelected?.call(9);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColor.primary,
