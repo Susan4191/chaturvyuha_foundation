@@ -269,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final highlights = [
       (
         icon: Icons.auto_awesome_outlined,
-        title: 'Spiritual Activities',
+        title: 'Spiritual Activities & Programs',
         description:
             'Organize spiritual gatherings and programs that encourage reflection and meaningful connection.',
       ),
