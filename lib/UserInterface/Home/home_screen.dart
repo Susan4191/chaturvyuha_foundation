@@ -7,7 +7,8 @@ import '../../widgets/highlight_card.dart';
 import '../../widgets/image_text_card.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final ValueChanged<int>? onTabSelected;
+  const HomeScreen({super.key, this.onTabSelected});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -270,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // Membership button
         ElevatedButton(
           onPressed: () {
-            // TODO: Connect this to your membership screen.
+            widget.onTabSelected?.call(7);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColor.primary,
@@ -968,7 +969,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: importantLinks
                             .map(
                               (l) => InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  widget.onTabSelected?.call(
+                                    importantLinks.indexOf(l),
+                                  );
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 2,
@@ -1038,7 +1043,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: importantLinks
                       .map(
                         (l) => InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            widget.onTabSelected?.call(
+                              importantLinks.indexOf(l),
+                            );
+                          },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 4,

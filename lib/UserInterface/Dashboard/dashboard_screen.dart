@@ -22,8 +22,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
 
   final List<String> _navigation = AppConstants.navigationItems;
-  final List<Widget> _pages = [
-    const HomeScreen(),
+  List<Widget> get _pages => [
+    HomeScreen(
+      onTabSelected: (index) => setState(() => _selectedIndex = index),
+    ),
     const AboutScreen(),
     const DharmaSanskritiScreen(),
     const YogaMeditationScreen(),
