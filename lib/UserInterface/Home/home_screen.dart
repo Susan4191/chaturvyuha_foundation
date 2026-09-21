@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:chaturvyuha_foundation/utils/app_colors.dart';
 
 import '../../utils/app_text_styles.dart';
+import '../../widgets/highlight_card.dart';
+import '../../widgets/image_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -145,7 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const SizedBox(width: 40),
                                 Expanded(
                                   flex: 5,
-                                  child: _buildImageCard(
+                                  child: ImageCard(
+                                    imagePath: _logoPath,
                                     text:
                                         'Rooted in Tradition, Guided by Wisdom.',
                                   ),
@@ -158,7 +161,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 _buildIntroduction(isDesktop),
                                 const SizedBox(height: 32),
-                                _buildImageCard(
+                                ImageCard(
+                                  imagePath: _logoPath,
                                   text:
                                       'Rooted in Tradition, Guided by Wisdom.',
                                 ),
@@ -253,42 +257,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Image Card with optional text
-  Widget _buildImageCard({String? imagePath, String? text}) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: AppColor.surface,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColor.primary),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AspectRatio(
-            aspectRatio: 1.2,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.asset(imagePath ?? _logoPath, fit: BoxFit.contain),
-            ),
-          ),
-          if (text != null && text.trim().isNotEmpty) ...[
-            const SizedBox(height: 20),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.body.copyWith(
-                fontWeight: FontWeight.w600,
-                color: AppColor.primary,
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
   // Mission Highlights
   Widget _buildMissionHighlights(bool isDesktop) {
     final highlights = [
@@ -331,10 +299,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     for (int i = 0; i < highlights.length; i++) ...[
                       Expanded(
-                        child: _buildHighlightCard(
-                          highlights[i].icon,
-                          highlights[i].title,
-                          highlights[i].description,
+                        child: HighlightCard(
+                          icon: highlights[i].icon,
+                          title: highlights[i].title,
+                          description: highlights[i].description,
                         ),
                       ),
                       if (i < highlights.length - 1) const SizedBox(width: 20),
@@ -349,10 +317,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   .map(
                     (h) => Padding(
                       padding: const EdgeInsets.only(bottom: 20),
-                      child: _buildHighlightCard(
-                        h.icon,
-                        h.title,
-                        h.description,
+                      child: HighlightCard(
+                        icon: h.icon,
+                        title: h.title,
+                        description: h.description,
                       ),
                     ),
                   )
@@ -361,35 +329,6 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ],
-    );
-  }
-
-  //mission container card
-  Widget _buildHighlightCard(IconData icon, String title, String description) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: AppColor.surface,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColor.primary),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFFF0DC),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(icon, color: AppColor.primary, size: 28),
-          ),
-          const SizedBox(height: 20),
-          Text(title, style: AppTextStyles.title),
-          const SizedBox(height: 12),
-          Text(description, style: AppTextStyles.bodySmall),
-        ],
-      ),
     );
   }
 }
