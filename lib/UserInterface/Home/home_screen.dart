@@ -143,7 +143,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: _buildIntroduction(isDesktop),
                                 ),
                                 const SizedBox(width: 40),
-                                Expanded(flex: 5, child: _buildImage()),
+                                Expanded(
+                                  flex: 5,
+                                  child: _buildImageCard(
+                                    text:
+                                        'Rooted in Tradition, Guided by Wisdom.',
+                                  ),
+                                ),
                               ],
                             )
                           else
@@ -152,7 +158,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 _buildIntroduction(isDesktop),
                                 const SizedBox(height: 32),
-                                _buildImage(),
+                                _buildImageCard(
+                                  text:
+                                      'Rooted in Tradition, Guided by Wisdom.',
+                                ),
                               ],
                             ),
 
@@ -244,8 +253,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  //image
-  Widget _buildImage() {
+  // Image Card with optional text
+  Widget _buildImageCard({String? imagePath, String? text}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
@@ -254,12 +263,28 @@ class _HomeScreenState extends State<HomeScreen> {
         borderRadius: BorderRadius.circular(24),
         border: Border.all(color: AppColor.primary),
       ),
-      child: AspectRatio(
-        aspectRatio: 1.2,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: Image.asset(_logoPath, fit: BoxFit.contain),
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AspectRatio(
+            aspectRatio: 1.2,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.asset(imagePath ?? _logoPath, fit: BoxFit.contain),
+            ),
+          ),
+          if (text != null && text.trim().isNotEmpty) ...[
+            const SizedBox(height: 20),
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: AppTextStyles.body.copyWith(
+                fontWeight: FontWeight.w600,
+                color: AppColor.primary,
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }
@@ -269,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final highlights = [
       (
         icon: Icons.auto_awesome_outlined,
-        title: 'Spiritual Activities & Programs',
+        title: 'Spiritual Activities',
         description:
             'Organize spiritual gatherings and programs that encourage reflection and meaningful connection.',
       ),
