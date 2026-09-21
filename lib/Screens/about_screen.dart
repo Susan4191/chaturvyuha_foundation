@@ -9,7 +9,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColor.backgroundColor,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -94,7 +94,7 @@ class AboutScreen extends StatelessWidget {
               return Icon(
                 Icons.spa_outlined,
                 size: 100,
-                color: AppColors.primary,
+                color: AppColor.primary,
               );
             },
           ),
@@ -103,7 +103,7 @@ class AboutScreen extends StatelessWidget {
             'Wisdom • Wellness • Community',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: AppColors.primary,
+              color: AppColor.primary,
               fontSize: 14,
               fontWeight: FontWeight.w600,
               height: 1.6,
@@ -137,7 +137,7 @@ class AboutScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFFFFF0DC),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.grey),
+        border: Border.all(color: AppColor.grey),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,7 +247,7 @@ class AboutScreen extends StatelessWidget {
               color: const Color(0xFFFFF0DC),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: Icon(icon, color: AppColors.primary, size: 28),
+            child: Icon(icon, color: AppColor.primary, size: 28),
           ),
           const SizedBox(height: 20),
           Text(title, style: _headingStyle(23)),
@@ -263,11 +263,11 @@ class AboutScreen extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: AppColors.black, width: 2)),
+        border: Border(top: BorderSide(color: AppColor.black, width: 2)),
       ),
       child: Column(
         children: [
-          Icon(Icons.diversity_3_outlined, color: AppColors.primary, size: 36),
+          Icon(Icons.diversity_3_outlined, color: AppColor.primary, size: 36),
           const SizedBox(height: 16),
           Text(
             'A place for every community.',
@@ -290,7 +290,7 @@ class AboutScreen extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        color: AppColors.primary,
+        color: AppColor.primary,
         fontSize: 12,
         fontWeight: FontWeight.w700,
         letterSpacing: 2,
@@ -301,7 +301,7 @@ class AboutScreen extends StatelessWidget {
 
   TextStyle _headingStyle(double size) {
     return AppTextStyles.heading.copyWith(
-      color: AppColors.black,
+      color: AppColor.black,
       fontSize: size,
       fontWeight: FontWeight.w700,
       height: 1.2,
@@ -309,14 +309,14 @@ class AboutScreen extends StatelessWidget {
   }
 
   TextStyle _bodyStyle(double size) {
-    return TextStyle(color: AppColors.grey, fontSize: size, height: 1.7);
+    return TextStyle(color: AppColor.grey, fontSize: size, height: 1.7);
   }
 
   BoxDecoration _cardDecoration() {
     return BoxDecoration(
       color: const Color(0xFFFFFCF7),
       borderRadius: BorderRadius.circular(20),
-      border: Border.all(color: AppColors.grey),
+      border: Border.all(color: AppColor.grey),
     );
   }
 }

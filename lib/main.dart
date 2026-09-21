@@ -1,4 +1,4 @@
-import 'package:chaturvyuha_foundation/Screens/dashboard_screen.dart';
+import 'package:chaturvyuha_foundation/Screens/Dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
