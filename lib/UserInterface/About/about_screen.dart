@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:chaturvyuha_foundation/utils/app_colors.dart';
 
-import '../utils/app_text_styles.dart';
+import '../../utils/app_text_styles.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});

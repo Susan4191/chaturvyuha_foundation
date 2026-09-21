@@ -16,6 +16,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   static const String _logoPath = 'assets/chaturvedal-1.png';
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   // @override
   // void initState() {
@@ -126,6 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context, constraints) {
               final bool isDesktop = constraints.maxWidth >= 900;
               return SingleChildScrollView(
+                controller: _scrollController,
                 child: Center(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 1320),
@@ -970,9 +978,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             .map(
                               (l) => InkWell(
                                 onTap: () {
-                                  widget.onTabSelected?.call(
-                                    importantLinks.indexOf(l),
-                                  );
+                                  final index = importantLinks.indexOf(l);
+                                  if (index == 0) {
+                                    _scrollController.animateTo(
+                                      0,
+                                      duration: const Duration(
+                                        milliseconds: 500,
+                                      ),
+                                      curve: Curves.easeInOut,
+                                    );
+                                  } else {
+                                    widget.onTabSelected?.call(index);
+                                  }
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -1044,9 +1061,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       .map(
                         (l) => InkWell(
                           onTap: () {
-                            widget.onTabSelected?.call(
-                              importantLinks.indexOf(l),
-                            );
+                            final index = importantLinks.indexOf(l);
+                            if (index == 0) {
+                              _scrollController.animateTo(
+                                0,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.easeInOut,
+                              );
+                            } else {
+                              widget.onTabSelected?.call(index);
+                            }
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utils/app_text_styles.dart';
+import '../../utils/app_text_styles.dart';
 
 class YogaMeditationScreen extends StatelessWidget {
   const YogaMeditationScreen({super.key});

@@ -2,14 +2,14 @@ import 'package:chaturvyuha_foundation/utils/app_colors.dart';
 import 'package:chaturvyuha_foundation/utils/app_text_styles.dart';
 import 'package:chaturvyuha_foundation/utils/app_constants.dart';
 import 'package:flutter/material.dart';
+import '../About/about_screen.dart';
+import '../Become a member/become_member_scree.dart';
+import '../ContactUs/contact_us_screen.dart';
 import '../Home/home_screen.dart';
-import '../about_screen.dart';
-import '../become_member_scree.dart';
-import '../contact_us_screen.dart';
-import '../dharma_sanskriti_screen.dart';
-import '../education_screen.dart';
-import '../gallery_screen.dart';
-import '../yoga_meditation_screen.dart';
+import '../dharma_sanskriti_screen/dharma_sanskriti_screen.dart';
+import '../Educatios/education_screen.dart';
+import '../Galery/gallery_screen.dart';
+import '../YogaAndMeditio/yoga_meditation_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -26,6 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     HomeScreen(
       onTabSelected: (index) => setState(() => _selectedIndex = index),
     ),
+
     const AboutScreen(),
     const DharmaSanskritiScreen(),
     const YogaMeditationScreen(),
